@@ -19,6 +19,27 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/api/whoami', (req, res) => {
+  // Extract the IP address
+  const ipAddress = req.ip;
+
+  // Extract the preferred language from headers
+  const language = req.headers['accept-language'];
+
+  // Extract the software from the user-agent header
+  const software = req.headers['user-agent'];
+
+  // Construct the response object
+  const response = {
+    ipaddress: ipAddress,
+    language: language,
+    software: software,
+  };
+
+  // Send the response
+  res.json(response);
+});
+
 // your first API endpoint...
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
